@@ -1,0 +1,6 @@
+../Core/Src/it.c:11:6:SysTick_Handler	8	static
+../Core/Src/it.c:17:6:EXTI15_10_IRQHandler	16	static
+../Core/Src/it.c:25:6:HardFault_Handler	4	static
+../Core/Src/it.c:31:6:MemManage_Handler	4	static
+../Core/Src/it.c:37:6:BusFault_Handler	4	static
+../Core/Src/it.c:43:6:UsageFault_Handler	4	static
