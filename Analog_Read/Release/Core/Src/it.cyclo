@@ -1,0 +1,5 @@
+../Core/Src/it.c:11:6:SysTick_Handler	1
+../Core/Src/it.c:17:6:HardFault_Handler	1
+../Core/Src/it.c:23:6:MemManage_Handler	1
+../Core/Src/it.c:29:6:BusFault_Handler	1
+../Core/Src/it.c:35:6:UsageFault_Handler	1
