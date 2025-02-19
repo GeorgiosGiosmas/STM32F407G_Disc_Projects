@@ -1465,7 +1465,7 @@ int main(void)
  800101c:	681b      	ldr	r3, [r3, #0]
  800101e:	69ba      	ldr	r2, [r7, #24]
  8001020:	63da      	str	r2, [r3, #60]	@ 0x3c
-			Delay(20); // Delay ~100ms
+			Delay(20); // Delay 20ms
  8001022:	2014      	movs	r0, #20
  8001024:	f000 f9e4 	bl	80013f0 <Delay>
 

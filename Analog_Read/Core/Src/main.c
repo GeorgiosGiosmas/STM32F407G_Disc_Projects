@@ -57,7 +57,7 @@ int main(void)
 			// Update the PWM signal.
 			intermediate = (int_val / 4096) * 19;
 			__HAL_TIM_SET_COMPARE(&pwm_timer, TIM_CHANNEL_3, intermediate);
-			Delay(20); // Delay ~100ms
+			Delay(20); // Delay 20ms
 
 			potensiometer = potensiometer_value * 0.0007324;
 			sprintf(uart_buffer, "The Potensiometer has a value of: %1.2f Volt.\n\r", potensiometer);
