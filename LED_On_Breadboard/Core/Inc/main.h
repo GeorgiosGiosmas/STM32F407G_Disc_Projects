@@ -73,4 +73,9 @@ ReturnStatus GPIO_Set(GPIO_TypeDef *gpio);
  */
 ReturnStatus Button_Configuration(void);
 
+/*
+ * @brief This function implements delay in ms with the DWT module(Debugging and profiling feature in Arm Cortex-M processors, measures CPU cycles).
+ */
+void Delay(uint32_t ms);
+
 #endif /* INC_MAIN_H_ */

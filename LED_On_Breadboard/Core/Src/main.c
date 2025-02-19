@@ -219,15 +219,22 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if (GPIO_Pin == GPIO_PIN_10){
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_SET);
-		// Delay for ~200 ms
-		for(uint32_t i = 0; i < 800000; i++);
+		Delay(2000);	//Delay for 2 sec
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_2, GPIO_PIN_RESET);
 	}
 	else if(GPIO_Pin == GPIO_PIN_12){
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_SET);
-		// Delay for ~200 ms
-		for(uint32_t i = 0; i < 800000; i++);
+		Delay(2000);	//Delay for 2 sec
 		HAL_GPIO_WritePin(GPIOD, GPIO_PIN_3, GPIO_PIN_RESET);
 	}
+}
+
+void Delay(uint32_t ms)
+{
+	DWT->CTRL |= (1 << 0); // Enable the DTW counter of the CortexM4
+	uint32_t start = DWT->CYCCNT;
+	uint32_t ticks = ms * (HAL_RCC_GetHCLKFreq() / 1000);
+
+	while ((DWT->CYCCNT - start) < ticks);
 }
 
