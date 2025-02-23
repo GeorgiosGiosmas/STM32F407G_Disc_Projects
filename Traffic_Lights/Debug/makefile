@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := LED_On_Example
+BUILD_ARTIFACT_NAME := Traffic_Lights
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-LED_On_Example.elf \
+Traffic_Lights.elf \
 
 MAP_FILES += \
-LED_On_Example.map \
+Traffic_Lights.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-LED_On_Example.list \
+Traffic_Lights.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: LED_On_Example.elf secondary-outputs
+main-build: Traffic_Lights.elf secondary-outputs
 
 # Tool invocations
-LED_On_Example.elf LED_On_Example.map: $(OBJS) $(USER_OBJS) C:\Electrical_And_Computer_Engineering\Computers_Electronics\Computers_Electronics\Mastering_Microcontroller_Timers_PWM_CAN_Low_Power\LED_On_Example\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "LED_On_Example.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Electrical_And_Computer_Engineering\Computers_Electronics\Computers_Electronics\Mastering_Microcontroller_Timers_PWM_CAN_Low_Power\LED_On_Example\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="LED_On_Example.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Traffic_Lights.elf Traffic_Lights.map: $(OBJS) $(USER_OBJS) C:\Electrical_And_Computer_Engineering\Computers_Electronics\Computers_Electronics\Mastering_Microcontroller_Timers_PWM_CAN_Low_Power\Traffic_Lights\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Traffic_Lights.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Electrical_And_Computer_Engineering\Computers_Electronics\Computers_Electronics\Mastering_Microcontroller_Timers_PWM_CAN_Low_Power\Traffic_Lights\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Traffic_Lights.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-LED_On_Example.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "LED_On_Example.list"
+Traffic_Lights.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Traffic_Lights.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) LED_On_Example.elf LED_On_Example.list LED_On_Example.map default.size.stdout
+	-$(RM) Traffic_Lights.elf Traffic_Lights.list Traffic_Lights.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

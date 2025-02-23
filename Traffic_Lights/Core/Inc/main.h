@@ -89,11 +89,6 @@ void Delay(uint32_t ms);
 void Choose_Pattern(void);
 
 /*
- * @brief This a custom IRQ handler for TIMER's 6 IRQ handler  @ref TIM6_DAC_IRQHandler.
- */
-void TIMER6_IRQ_Handler(void);
-
-/*
  * @brief This function sets up the button.
  */
 ReturnStatus Button_Configuration(void);

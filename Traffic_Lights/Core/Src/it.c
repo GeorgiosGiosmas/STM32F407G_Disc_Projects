@@ -17,10 +17,9 @@ void SysTick_Handler(void)
 	HAL_SYSTICK_IRQHandler();
 }
 
-void TIM6_DAC_IRQHandler(void)
+void TIM5_IRQHandler(void)
 {
-	HAL_TIM_IRQHandler(&timer6);
-	TIMER6_IRQ_Handler();
+	HAL_TIM_IRQHandler(&timer5);
 }
 
 void EXTI2_IRQHandler(void)

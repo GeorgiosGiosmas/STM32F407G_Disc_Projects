@@ -11,7 +11,7 @@
 
 TIM_HandleTypeDef timer5;
 UART_HandleTypeDef uart4;
-volatile uint8_t next_pattern = 0, maintenance = 0,blue_on = 0, counter = 0;
+volatile uint8_t current_pattern = 0,next_pattern = 0, maintenance = 0,blue_on = 0, counter = 0;
 
 int main(void)
 {
@@ -41,8 +41,13 @@ int main(void)
 	if( UART4_Configuration(&uart4) != Execution_Succesfull)
 		return Execution_Failed;
 
+	// Initial State.
+	next_pattern = 2;
+	Choose_Pattern();
+
 	// Start TIMER5.
-	HAL_TIM_Base_Start_IT(&timer5);
+	if( HAL_TIM_Base_Start_IT(&timer5) != HAL_OK )
+		return Execution_Failed;
 
 	// Infinite loop.
 	for(;;);
@@ -218,8 +223,8 @@ ReturnStatus Timer_Configuration(TIM_HandleTypeDef *timer)
 
 	timer->Instance = TIM5;
 	timer->Init.CounterMode = TIM_COUNTERMODE_UP; // ==> For a basic counter isn't configurable
-	timer->Init.Prescaler = 400;  // ==> OutputClock(clock that timer uses to count) = InputClock / (prescaler  1)
-	timer->Init.Period = 10000; // ----- Counts for ~10 seconds -----
+	timer->Init.Prescaler = 400;
+	timer->Init.Period = 10000;
 
 	if ( HAL_TIM_Base_Init(timer) != HAL_OK)
 		return Execution_Failed;
@@ -266,13 +271,13 @@ ReturnStatus UART4_Configuration(UART_HandleTypeDef *uart)
 
 void Choose_Pattern(void)
 {
-	char buffer[50];
+	char buffer[50] = {0};
 
 	switch (next_pattern)
 	{
 		// Green Light on. Cars coming through.
 		case 0:
-
+			current_pattern = 0;
 			if(maintenance == 0)
 			{
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7, GPIO_PIN_RESET);
@@ -282,7 +287,7 @@ void Choose_Pattern(void)
 
 		// Yellow light on.
 		case 1:
-
+			current_pattern = 1;
 			if(maintenance == 0)
 			{
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_7, GPIO_PIN_RESET);
@@ -292,7 +297,7 @@ void Choose_Pattern(void)
 
 		// Red light on. Stop!
 		case 2:
-
+			current_pattern = 2;
 			if(maintenance == 0)
 			{
 				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_5 | GPIO_PIN_7, GPIO_PIN_RESET);
@@ -302,10 +307,10 @@ void Choose_Pattern(void)
 
 		// Maintenance state. Blue and Yellow LED blink.
 		case 3:
-
-			sprintf(buffer, " ATTENTION AHEAD!  LIGHTS UNDER MAINTENANCE!!! ");
-			HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50);
-			Delay(100);
+			current_pattern = 3;
+			sprintf(buffer, "ATTENTION AHEAD!  LIGHTS UNDER MAINTENANCE!!!\r\n");
+			HAL_UART_Transmit_IT(&uart4, (uint8_t *)buffer, 50);
+			//Delay(200);
 
 			if(blue_on == 0)
 			{
@@ -332,24 +337,59 @@ void Delay(uint32_t ms)
 	while ((DWT->CYCCNT - start) < ticks);
 }
 
-void TIMER6_IRQ_Handler(void)
+// Called every 1 second.
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	next_leds_on ^= 1;
-	Choose_Pattern();
+	UNUSED(htim);
+	if( maintenance == 1 )
+	{
+		blue_on ^= 1;
+		Choose_Pattern();
+	}
+	if( counter == 15 && current_pattern == 2 )
+	{
+		counter = 0;
+		next_pattern = 0;
+		Choose_Pattern();
+	}else if( counter == 15 && current_pattern == 0)
+	{
+		counter = 0;
+		next_pattern = 1;
+		Choose_Pattern();
+	}else if( counter == 5 && current_pattern == 1)
+	{
+		counter = 0;
+		next_pattern = 2;
+		Choose_Pattern();
+	}else
+	{
+		counter += 1;
+	}
 }
 
 // Selects the next pattern after the button is pressed.
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	next_pattern += 1;
-
-	if(next_pattern == 4)
-		next_pattern = 0;
-
-	Choose_Pattern();
+	if( GPIO_Pin == GPIO_PIN_2 )
+	{
+		if( maintenance == 0 )
+		{
+			counter = 0;
+			maintenance = 1;
+			next_pattern = 3;
+			Choose_Pattern();
+		}
+	}
+	else if ( GPIO_Pin == GPIO_PIN_3 )
+	{
+		if( maintenance == 1 )
+		{
+			counter = 0;
+			maintenance = 0;
+			next_pattern = 2;
+			Choose_Pattern();
+		}
+	}
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
 
-}

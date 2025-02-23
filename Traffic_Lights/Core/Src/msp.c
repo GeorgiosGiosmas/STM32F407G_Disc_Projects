@@ -24,18 +24,19 @@ void HAL_MspInit(void)
 	HAL_NVIC_EnableIRQ(SysTick_IRQn);
 
 	// Enable EXTI2 and EXTI3 for buttons.
-	HAL_NVIC_SetPriority(EXTI2_IRQn, 10, 0);
-	HAL_NVIC_SetPriority(EXTI3_IRQn, 10, 0);
+	HAL_NVIC_SetPriority(EXTI2_IRQn, 15, 0);
+	HAL_NVIC_SetPriority(EXTI3_IRQn, 15, 0);
 	HAL_NVIC_EnableIRQ(EXTI2_IRQn);
 	HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 }
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
-	__HAL_RCC_TIM6_CLK_ENABLE();
+	UNUSED(htim);
+	__HAL_RCC_TIM5_CLK_ENABLE();
 
-	HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 15, 0);
-	HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+	HAL_NVIC_SetPriority(TIM5_IRQn, 15, 0);
+	HAL_NVIC_EnableIRQ(TIM5_IRQn);
 
 }
 
