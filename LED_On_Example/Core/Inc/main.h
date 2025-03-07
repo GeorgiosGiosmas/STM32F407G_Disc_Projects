@@ -64,12 +64,12 @@ typedef enum
 uint8_t SystemClock_Config(Clock_Source_t clk);
 
 /*
- * @brief This function configures the appriopriate GPIO pins as LED outputs.
+ * @brief This function configures the appropriate GPIO pins as LED outputs.
  */
 uint8_t GPIO_Set(GPIO_TypeDef *gpio);
 
 /*
- * @brief This function configures the basic Timer which is used for blinking the LEDS.
+ * @brief This function configures the basic TIMER6 which is used for blinking the LEDS.
  */
 uint8_t Timer_Configuration(void);
 
@@ -84,13 +84,13 @@ uint8_t USART3_Configuration(void);
 void Choose_Pattern(void);
 
 /*
- * @brief This a custom IRQ handler for TIMER's 6 IRQ handler  @ref TIM6_DAC_IRQHandler.
- */
-void TIMER6_IRQ_Handler(void);
-
-/*
- * @brief This function sets up the button.
+ * @brief This function sets up the button responsible for changing the blinking pattern.
  */
 uint8_t Button_Configuration(void);
+
+/*
+ * @brief This function implements delay in ms with the DWT module(Debugging and profiling feature in Arm Cortex-M processors, measures CPU cycles).
+ */
+void Delay(uint32_t ms);
 
 #endif /* INC_MAIN_H_ */

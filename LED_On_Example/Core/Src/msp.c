@@ -10,14 +10,13 @@
 
 void HAL_MspInit(void)
 {
-
 	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
 	// Enable necessary IRQs
 	HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
 	HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
 	HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
-	HAL_NVIC_SetPriority(SysTick_IRQn, 3, 0);
+	HAL_NVIC_SetPriority(SysTick_IRQn, 5, 0);
 
 	HAL_NVIC_EnableIRQ(MemoryManagement_IRQn);
 	HAL_NVIC_EnableIRQ(BusFault_IRQn);
@@ -27,7 +26,6 @@ void HAL_MspInit(void)
 	// Enable EXTI0 for button.
 	HAL_NVIC_SetPriority(EXTI0_IRQn, 10, 0);
 	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
-
 }
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
@@ -36,7 +34,6 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 
 	HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 15, 0);
 	HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
-
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef *huart)
@@ -56,8 +53,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
 	HAL_GPIO_Init(GPIOB, &usart3_gpio);
 
-	HAL_NVIC_SetPriority(USART3_IRQn, 15, 0);
+	HAL_NVIC_SetPriority(USART3_IRQn, 9, 0);
 	HAL_NVIC_EnableIRQ(USART3_IRQn);
-
-
 }

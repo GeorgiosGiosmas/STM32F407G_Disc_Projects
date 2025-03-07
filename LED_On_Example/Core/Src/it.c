@@ -19,21 +19,20 @@ void SysTick_Handler(void)
 void TIM6_DAC_IRQHandler(void)
 {
 	HAL_TIM_IRQHandler(&timer6);
-	TIMER6_IRQ_Handler();
 }
 
 void EXTI0_IRQHandler(void)
 {
-	// Delay for ~200 ms
-	for(uint32_t i = 0; i < 80000; i++);
+	// Delay for 200 ms
+	Delay(200);
 	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
 }
 
 void USART3_IRQHandler(void)
 {
 	HAL_UART_IRQHandler(&usart3);
-
 }
+
 void HardFault_Handler(void)
 {
 	// Halt execution, when HardFault error occurs.

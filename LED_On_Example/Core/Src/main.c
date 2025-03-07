@@ -13,6 +13,8 @@ TIM_HandleTypeDef timer6;
 UART_HandleTypeDef usart3;
 volatile uint8_t next_pattern = 0;
 volatile uint8_t next_leds_on = 0;
+char buffer[50] = { 0 };
+
 
 int main(void)
 {
@@ -20,28 +22,30 @@ int main(void)
 	/* Initializes low level hardware at the processor level */
 	HAL_Init();
 
-	// Sets other clock sources besides HSI
-	if( SystemClock_Config(HSE_2) != Execution_Succesfull)
+	// Sets other clock sources besides HSI, if necessary --> Look at Clock_Source_t.
+	if( SystemClock_Config(HSE_4) != Execution_Succesfull)
 		return Execution_Failed;
 
-	volatile uint64_t freq = HAL_RCC_GetHCLKFreq(); // Checks the speed of the Enabled Clock Source
+	//volatile uint64_t freq = HAL_RCC_GetHCLKFreq(); // Checks the speed of the Enabled Clock Source
 
 	// Configure port D with the LEDs
 	if( GPIO_Set(GPIOD) != Execution_Succesfull)
 		return Execution_Failed;
 
+	// Configure the TIMER6 module.
 	if ( Timer_Configuration() != Execution_Succesfull)
 		return Execution_Failed;
 
-	// Configure the button
+	// Configure the BUTTON.
 	if ( Button_Configuration() != Execution_Succesfull)
 		return Execution_Failed;
 
 	if( USART3_Configuration() != Execution_Succesfull)
 		return Execution_Failed;
 
-	// Start Timer6 counting.
-	HAL_TIM_Base_Start_IT(&timer6);
+	// Start TIMER6.
+	if( HAL_TIM_Base_Start_IT(&timer6) != HAL_OK )
+		return Execution_Failed;
 
 	// Infinite loop.
 	for(;;);
@@ -214,11 +218,11 @@ uint8_t GPIO_Set(GPIO_TypeDef *gpio)
 
 uint8_t Timer_Configuration(void)
 {
-
+	memset(&timer6, 0, sizeof(timer6));
 	timer6.Instance = TIM6;
 	// timer6.Init.CounterMode = TIM_COUNTERMODE_UP; ==> For a basic counter isn't configurable
-	timer6.Init.Prescaler = 2000;  // ==> OutputClock(clock that timer uses to count) = InputClock / (prescaler  1)
-	timer6.Init.Period = 1000 - 1; // ----- Counts for ~10 seconds -----
+	timer6.Init.Prescaler = 400;  // ==> OutputClock(clock that timer uses to count) = InputClock / (prescaler  1)
+	timer6.Init.Period = 9999; // ----- Counts for ~10 seconds -----
 
 	if ( HAL_TIM_Base_Init(&timer6) != HAL_OK)
 		return Execution_Failed;
@@ -247,12 +251,12 @@ uint8_t Button_Configuration(void)
 
 uint8_t USART3_Configuration(void)
 {
+	memset(&usart3, 0, sizeof(usart3));
 
 	usart3.Instance = USART3;
-
 	usart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 	usart3.Init.BaudRate = 115200;
-	usart3.Init.Mode = UART_MODE_TX_RX;
+	usart3.Init.Mode = UART_MODE_TX;
 	usart3.Init.OverSampling = UART_OVERSAMPLING_16;
 	usart3.Init.Parity = UART_PARITY_NONE;
 	usart3.Init.StopBits = UART_STOPBITS_1;
@@ -266,14 +270,13 @@ uint8_t USART3_Configuration(void)
 
 void Choose_Pattern(void)
 {
-	char buffer[50];
-
 	switch (next_pattern)
 	{
 		case 0:
 
-			sprintf(buffer, "This is the first LED pattern!!!");
-			HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50);
+			sprintf(buffer, "This is the first LED pattern!!!\r\n");
+			if( HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50) != HAL_OK )
+				return ;
 
 			if(next_leds_on == 0)
 			{
@@ -290,8 +293,9 @@ void Choose_Pattern(void)
 
 		case 1:
 
-			sprintf(buffer, "This is the second LED pattern!!!");
-			HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50);
+			sprintf(buffer, "This is the second LED pattern!!!\r\n");
+			if( HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50) != HAL_OK )
+				return ;
 
 			if(next_leds_on == 0)
 			{
@@ -308,8 +312,9 @@ void Choose_Pattern(void)
 
 		case 2:
 
-			sprintf(buffer, "This is the third LED pattern!!!");
-			HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50);
+			sprintf(buffer, "This is the third LED pattern!!!\r\n");
+			if( HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50) != HAL_OK )
+				return ;
 
 			if(next_leds_on == 0)
 			{
@@ -326,8 +331,9 @@ void Choose_Pattern(void)
 
 		case 3:
 
-			sprintf(buffer, "This is the fourth LED pattern!!!");
-			HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50);
+			sprintf(buffer, "This is the fourth LED pattern!!!\r\n");
+			if( HAL_UART_Transmit_IT(&usart3, (uint8_t *)buffer, 50) != HAL_OK )
+				return ;
 
 			if(next_leds_on == 0)
 			{
@@ -344,8 +350,9 @@ void Choose_Pattern(void)
 	}
 }
 
-void TIMER6_IRQ_Handler(void)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+	UNUSED(htim);
 	next_leds_on ^= 1;
 	Choose_Pattern();
 }
@@ -361,7 +368,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	Choose_Pattern();
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+// Delay function.
+void Delay(uint32_t ms)
 {
+	DWT->CTRL |= (1 << 0); // Enable the DTW counter of the CortexM4
+	uint32_t start = DWT->CYCCNT;
+	uint32_t ticks = ms * (HAL_RCC_GetHCLKFreq() / 1000);
 
+	while ((DWT->CYCCNT - start) < ticks);
 }
+
