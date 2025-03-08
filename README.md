@@ -25,3 +25,10 @@
 # Project_3: "LED_ON_Example"
 
 ## Simple Project where by pushing the User Button of STM32F407G the internal LEDs are switching blinking patterns. In total, there are 4 blinking patterns. The LEDs are blinking every 1 second. 
+
+# Project_4: "Traffic_Lights"
+
+## A project that simulates the functionality of a Traffic Lights system. GREEN LED stays ON for 15 seconds, the YELLOW LED stays ON for 5 seconds and the RED LED stays ON for 15 seconds. This procedure keeps going on until the system needs maintenance(first BUTTON is pressed). In maintenance, the other two LEDs are blinking alternatingly every 1 second and UART4 prints in Tera Term that the system is under maintenance. The system returns to its original functionality by pressing the second BUTTON(maintenance completed).
+
+### Traffic Lights System when the RED LED is ON:
+![RED_LED_ON](images/traffic_lights.jpg)
