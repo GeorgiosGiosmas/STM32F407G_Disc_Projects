@@ -21,3 +21,7 @@
 
 ### USART1 outputs in Tera Term for the previous cases:
 ![analog_read_3](images/project_analog_3.jpg)
+
+# Project_3: "LED_ON_Example"
+
+## Simple Project where by pushing the User Button of STM32F407G the internal LEDs are switching blinking patterns. In total, there are 4 blinking patterns. The LEDs are blinking every 1 second. 
