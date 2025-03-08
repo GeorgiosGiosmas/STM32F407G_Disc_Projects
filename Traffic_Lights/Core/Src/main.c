@@ -12,6 +12,8 @@
 TIM_HandleTypeDef timer5;
 UART_HandleTypeDef uart4;
 volatile uint8_t current_pattern = 0,next_pattern = 0, maintenance = 0,blue_on = 0, counter = 0;
+char *buffer = "ATTENTION AHEAD!  LIGHTS UNDER MAINTENANCE!!!\r\n";
+
 
 int main(void)
 {
@@ -23,7 +25,7 @@ int main(void)
 	if( SystemClock_Config(HSE_4) != Execution_Succesfull)
 		return Execution_Failed;
 
-	volatile uint64_t freq = HAL_RCC_GetHCLKFreq(); // Checks the speed of the Enabled Clock Source
+	//volatile uint64_t freq = HAL_RCC_GetHCLKFreq(); // Checks the speed of the Enabled Clock Source
 
 	// Configure PORTB with the LEDs.
 	if( GPIO_Configuration() != Execution_Succesfull)
@@ -271,8 +273,6 @@ ReturnStatus UART4_Configuration(UART_HandleTypeDef *uart)
 
 void Choose_Pattern(void)
 {
-	char buffer[50] = {0};
-
 	switch (next_pattern)
 	{
 		// Green Light on. Cars coming through.
@@ -308,9 +308,8 @@ void Choose_Pattern(void)
 		// Maintenance state. Blue and Yellow LED blink.
 		case 3:
 			current_pattern = 3;
-			sprintf(buffer, "ATTENTION AHEAD!  LIGHTS UNDER MAINTENANCE!!!\r\n");
-			HAL_UART_Transmit_IT(&uart4, (uint8_t *)buffer, 50);
-			//Delay(200);
+			if( HAL_UART_Transmit_IT(&uart4, (uint8_t *)buffer, strlen(buffer)) != HAL_OK )
+				return ;
 
 			if(blue_on == 0)
 			{
