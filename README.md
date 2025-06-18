@@ -32,3 +32,18 @@
 
 ### Traffic Lights System when the RED LED is ON:
 ![RED_LED_ON](images/traffic_lights.jpg)
+
+# Project_5: "Analog_Read_LCD"
+
+## A project similar to Analog_Read where custom LCD drivers have been developed to display the Regulated Voltage from the Potensiometer. These drivers act as mediator for the communication between the microcontroller and the LCD Display. 
+
+### Below there are 3 images showing the different values being displayed on the LCD for different Potensiometer Voltages:
+
+#### Image 1:
+![lcd1](images/lcd1.jpg)
+
+#### Image 2:
+![lcd2](images/lcd2.jpg)
+
+#### Image 3:
+![lcd3](images/lcd3.jpg)

@@ -3,6 +3,8 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="GPIO_Alternate_function_selection"/>
+		<item value="GPIO_mode_define"/>
 		<item value="SPI_Direction"/>
 		<item value="SPI_Data_Size"/>
 		<item value="SPI_Mode"/>

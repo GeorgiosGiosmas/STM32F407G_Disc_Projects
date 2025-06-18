@@ -1,7 +1,7 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:Analog_Read_LCD Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Analog_Read Debug
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Analog_Read Debug,org.eclipse.launchbar.core.descriptorType.default\:Analog_Read_LCD Debug
 eclipse.preferences.version=1
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Analog_Read\ Debug/activeLaunchMode=debug
 org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Analog_Read\ Debug/activeLaunchTarget=null\:---
