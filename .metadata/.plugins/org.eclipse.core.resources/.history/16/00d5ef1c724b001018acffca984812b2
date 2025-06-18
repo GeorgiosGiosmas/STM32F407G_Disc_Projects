@@ -1,0 +1,18 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Jun 17, 2025
+ *      Author: gigio
+ */
+
+#include "lcd.h"
+
+void Delay_US(uint32_t us)
+{
+	DWT->CTRL |= (1 << 0); // Enable the DTW counter of the CortexM4
+	uint32_t start = DWT->CYCCNT;
+	uint32_t ticks = us * (HAL_RCC_GetHCLKFreq() / 1000000);
+
+	while ((DWT->CYCCNT - start) < ticks);
+}
+

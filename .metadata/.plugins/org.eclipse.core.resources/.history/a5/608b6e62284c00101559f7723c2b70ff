@@ -1,0 +1,77 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Jun 17, 2025
+ *      Author: gigio
+ */
+
+#include "lcd.h"
+
+void Set_Enable(void)
+{
+	HAL_GPIO_WritePin(LCD_E_PIN_PORT, LCD_E_PIN, GPIO_PIN_SET);
+	Delay(1);
+}
+
+void Reset_Enable(void)
+{
+	Delay(1);
+	HAL_GPIO_WritePin(LCD_E_PIN_PORT, LCD_E_PIN, GPIO_PIN_RESET);
+}
+
+void LCD_Write(uint8_t wr)
+{
+	Set_Enable();
+	HAL_GPIO_WritePin(LCD_D0_PIN_PORT, LCD_D0_PIN, (wr & 0x01) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D1_PIN_PORT, LCD_D1_PIN, (wr & 0x02) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D2_PIN_PORT, LCD_D2_PIN, (wr & 0x04) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D3_PIN_PORT, LCD_D3_PIN, (wr & 0x08) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D4_PIN_PORT, LCD_D4_PIN, (wr & 0x10) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D5_PIN_PORT, LCD_D5_PIN, (wr & 0x20) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D6_PIN_PORT, LCD_D6_PIN, (wr & 0x40) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D7_PIN_PORT, LCD_D7_PIN, (wr & 0x80) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	Reset_Enable();
+}
+
+void LCD_WriteCommand(uint8_t cmd)
+{
+	HAL_GPIO_WritePin(LCD_RS_PIN_PORT, LCD_RS_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_RW_PIN_PORT, LCD_RW_PIN, GPIO_PIN_RESET);
+	LCD_Write(cmd);
+}
+
+void LCD_WriteData(uint8_t *data, uint8_t size)
+{
+	HAL_GPIO_WritePin(LCD_RS_PIN_PORT, LCD_RS_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_RW_PIN_PORT, LCD_RW_PIN, GPIO_PIN_RESET);
+
+	for(uint8_t i=0; i<size; i++)
+		LCD_Write(data[i]);
+
+}
+
+void LCD_Clear_Screen(void)
+{
+	LCD_WriteCommand(0x01);
+}
+
+void LCD_Init(void)
+{
+	Delay(40);
+	LCD_WriteCommand(0x38);
+	Delay(5);
+	LCD_WriteCommand(0x38);
+	Delay(2);
+	LCD_WriteCommand(0x0C);
+	Delay(2);
+	LCD_WriteCommand(0x01);
+	Delay(5);
+	LCD_WriteCommand(0x06);
+	Delay(1);
+}
+
+__weak void LCD_Configure_GPIOS(void)
+{
+	/* Configure this function inside the msp.c file .
+}
+

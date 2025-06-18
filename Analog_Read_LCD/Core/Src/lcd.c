@@ -69,3 +69,9 @@ void LCD_Init(void)
 	LCD_WriteCommand(0x06);
 	Delay(1);
 }
+
+__weak void LCD_Configure_GPIOS(void)
+{
+	/* Configure this function inside the msp.c file . */
+}
+

@@ -1,0 +1,8 @@
+../Core/Src/lcd.c:10:6:Set_Enable	8	static
+../Core/Src/lcd.c:16:6:Reset_Enable	8	static
+../Core/Src/lcd.c:22:6:LCD_Write	16	static
+../Core/Src/lcd.c:36:6:LCD_WriteCommand	16	static
+../Core/Src/lcd.c:43:6:LCD_WriteData	24	static
+../Core/Src/lcd.c:53:6:LCD_Clear_Screen	8	static
+../Core/Src/lcd.c:58:6:LCD_Init	8	static
+../Core/Src/lcd.c:73:13:LCD_Configure_GPIOS	4	static

@@ -46,30 +46,6 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef* hadc)
 
 }
 
-void HAL_UART_MspInit(UART_HandleTypeDef *huart)
-{
-	UNUSED(huart);
-	GPIO_InitTypeDef gpio_uart;
-
-	memset(&gpio_uart, 0, sizeof(gpio_uart));
-
-	// Enable the UART and GPIO PORTB clock.
-	__HAL_RCC_USART1_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-
-	gpio_uart.Pin = GPIO_PIN_6 | GPIO_PIN_7;
-	gpio_uart.Speed = GPIO_SPEED_FREQ_LOW;
-	gpio_uart.Mode = GPIO_MODE_AF_PP;
-	gpio_uart.Alternate = GPIO_AF7_USART1;
-	gpio_uart.Pull = GPIO_PULLUP;
-
-	HAL_GPIO_Init(GPIOB, &gpio_uart);
-
-	HAL_NVIC_SetPriority(USART1_IRQn, 15, 0);
-	HAL_NVIC_EnableIRQ(USART1_IRQn);
-
-}
-
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 {
 	UNUSED(htim);
@@ -91,4 +67,24 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 
 	HAL_NVIC_SetPriority(TIM2_IRQn, 15, 0);
 	HAL_NVIC_EnableIRQ(TIM2_IRQn);
+}
+
+void LCD_Configure_GPIOS(void)
+{
+	GPIO_InitTypeDef lcd_gpio;
+	memset(&lcd_gpio, 0, sizeof(lcd_gpio));
+
+	// Enable necessary clocks.
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+	__HAL_RCC_GPIOD_CLK_ENABLE();
+
+	lcd_gpio.Pin = GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6;
+	lcd_gpio.Speed = GPIO_SPEED_FREQ_LOW;
+	lcd_gpio.Mode = GPIO_MODE_OUTPUT_PP;
+	lcd_gpio.Pull = GPIO_NOPULL;
+
+	HAL_GPIO_Init(GPIOC, &lcd_gpio);
+
+	lcd_gpio.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_6 | GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9;
+	HAL_GPIO_Init(GPIOD, &lcd_gpio);
 }

@@ -1,0 +1,36 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Jun 17, 2025
+ *      Author: gigio
+ */
+
+#include "lcd.h"
+
+void Delay_US(uint32_t us)
+{
+	DWT->CTRL |= (1 << 0); // Enable the DTW counter of the CortexM4
+	uint32_t start = DWT->CYCCNT;
+	uint32_t ticks = us * (HAL_RCC_GetHCLKFreq() / 1000000);
+
+	while ((DWT->CYCCNT - start) < ticks);
+}
+
+void LCD_Write(uint8_t wr)
+{
+	HAL_GPIO_WritePin(LCD_D0_PIN_PORT, LCD_D0_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D1_PIN_PORT, LCD_D1_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D2_PIN_PORT, LCD_D2_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D3_PIN_PORT, LCD_D3_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D4_PIN_PORT, LCD_D4_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D5_PIN_PORT, LCD_D5_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D6_PIN_PORT, LCD_D6_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D7_PIN_PORT, LCD_D7_PIN, GPIO_PIN_RESET);
+
+}
+
+void LCD_WriteCommand(uint8_t cmd)
+{
+	HAL_GPIO_WritePin(LCD_RS_PIN_PORT, LCD_RS_PIN, GPIO_PIN_RESET);
+
+}

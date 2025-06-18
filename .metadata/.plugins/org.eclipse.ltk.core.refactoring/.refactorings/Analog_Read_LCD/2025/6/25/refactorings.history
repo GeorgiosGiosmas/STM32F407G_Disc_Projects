@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Analog_Read_LCD/Analog_Read.ioc&apos; to &apos;Analog_Read_LCD.ioc&apos;" description="Rename resource &apos;Analog_Read.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Analog_Read.ioc" name="Analog_Read_LCD.ioc" stamp="1750159429460" updateReferences="true"/>
+</session>

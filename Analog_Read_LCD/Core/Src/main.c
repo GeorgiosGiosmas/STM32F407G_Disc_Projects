@@ -9,17 +9,16 @@
 #include <stdio.h>
 #include "main.h"
 
-ADC_HandleTypeDef adc1_potensiometer, adc2_heat_sensor;
-ADC_ChannelConfTypeDef potensiometer_channel, heat_sensor_channel;
-UART_HandleTypeDef usart1;
+ADC_HandleTypeDef adc1_potensiometer;
+ADC_ChannelConfTypeDef potensiometer_channel;
 TIM_HandleTypeDef pwm_timer;
 
 int main(void)
 {
 
-	char uart_buffer[50] = {0};
-	volatile uint32_t potensiometer_value, heat_sensor_value, intermediate;
-	volatile double potensiometer, temp_sensor, int_val = 0;
+	char lcd_buffer[16] = {0};
+	volatile uint32_t potensiometer_value, intermediate;
+	volatile double potensiometer, int_val = 0;
 
 	/* Initializes low level hardware at the processor level */
 	HAL_Init();
@@ -32,16 +31,13 @@ int main(void)
 	if( ADC_Config(&adc1_potensiometer, ADC1, &potensiometer_channel, ADC_CHANNEL_0) != Execution_Succesfull)
 		return Execution_Failed;
 
-	if( ADC_Config(&adc2_heat_sensor, ADC2, &heat_sensor_channel, ADC_CHANNEL_1) != Execution_Succesfull)
-		return Execution_Failed;
-
-	// Configure the USART1 module
-	if( USART1_Config(&usart1) != Execution_Succesfull )
-		return Execution_Failed;
-
 	// Configure the PWM timer.
 	if( TIM2_PWM_Config(&pwm_timer) != Execution_Succesfull )
 		return Execution_Failed;
+
+	// Configure the LCD.
+	LCD_Configure_GPIOS();
+	LCD_Init();
 
 	// Start PWM Timer.
 	HAL_TIM_PWM_Start(&pwm_timer, TIM_CHANNEL_3);
@@ -60,24 +56,13 @@ int main(void)
 			Delay(20); // Delay 20ms
 
 			potensiometer = potensiometer_value * 0.0007324;
-			sprintf(uart_buffer, "The Potensiometer has a value of: %1.2f Volt.\n\r", potensiometer);
-			HAL_UART_Transmit_IT(&usart1, (const uint8_t* )uart_buffer, 50);
+			sprintf(lcd_buffer, "P: %1.2f V.\n\r", potensiometer);
+			LCD_WriteData((uint8_t*)lcd_buffer, 16);
 		}
 		HAL_ADC_Stop(&adc1_potensiometer);
 
-		Delay(100); // Delay ~100ms
-
-		// Start heat sensor reading.
-		HAL_ADC_Start(&adc2_heat_sensor);
-		if(HAL_ADC_PollForConversion(&adc2_heat_sensor, 5) == HAL_OK){
-			heat_sensor_value = HAL_ADC_GetValue(&adc2_heat_sensor);
-			temp_sensor = (heat_sensor_value * 0.07324) - 50;
-			sprintf(uart_buffer, "The Temp Sensor has a value of: %1.2f Celsius.\n\r", temp_sensor);
-			HAL_UART_Transmit_IT(&usart1, (const uint8_t* )uart_buffer, 50);
-		}
-		HAL_ADC_Stop(&adc2_heat_sensor);
-
 		Delay(5000); // Delay 5 sec
+		LCD_Clear_Screen();
 
 	}
 
@@ -258,26 +243,6 @@ ReturnStatus ADC_Config(ADC_HandleTypeDef *adc_handle, ADC_TypeDef *adc_instance
 	return Execution_Succesfull;
 }
 
-ReturnStatus USART1_Config(UART_HandleTypeDef *uart_handle)
-{
-	memset(uart_handle, 0, sizeof(*uart_handle));
-
-	uart_handle->Instance = USART1;
-	uart_handle->Init.BaudRate = 115200;
-	uart_handle->Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	uart_handle->Init.Mode = UART_MODE_TX;
-	uart_handle->Init.OverSampling = UART_OVERSAMPLING_16;
-	uart_handle->Init.Parity = UART_PARITY_NONE;
-	uart_handle->Init.StopBits = UART_STOPBITS_1;
-	uart_handle->Init.WordLength = UART_WORDLENGTH_8B;
-
-	if( HAL_UART_Init(uart_handle) != HAL_OK )
-		return Execution_Failed;
-
-	return Execution_Succesfull;
-
-}
-
 ReturnStatus TIM2_PWM_Config(TIM_HandleTypeDef *timer)
 {
 	memset(timer, 0, sizeof(*timer));
@@ -317,9 +282,6 @@ void Delay(uint32_t ms)
 	while ((DWT->CYCCNT - start) < ticks);
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
-{
 
-}
 
 

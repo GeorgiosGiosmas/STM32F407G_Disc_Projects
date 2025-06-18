@@ -8,19 +8,18 @@
 #ifndef INC_LCD_H_
 #define INC_LCD_H_
 
+#include <stdint.h>
 #include "stm32f4xx_hal.h"
-#include "stdint.h"
-
 /*
  * @brief	Definition of Pins and their Ports for LCD(2X16).
  */
-#define LCD_RS_PIN			GPIO_PIN_0
+#define LCD_RS_PIN			GPIO_PIN_4
 #define LCD_RS_PIN_PORT		GPIOC
 
-#define LCD_RW_PIN			GPIO_PIN_1
+#define LCD_RW_PIN			GPIO_PIN_5
 #define LCD_RW_PIN_PORT		GPIOC
 
-#define LCD_E_PIN			GPIO_PIN_2
+#define LCD_E_PIN			GPIO_PIN_6
 #define LCD_E_PIN_PORT		GPIOC
 
 
@@ -32,13 +31,13 @@
 #define LCD_D2_PIN_PORT		GPIOD
 #define LCD_D3_PIN			GPIO_PIN_3
 #define LCD_D3_PIN_PORT		GPIOD
-#define LCD_D4_PIN			GPIO_PIN_4
+#define LCD_D4_PIN			GPIO_PIN_6
 #define LCD_D4_PIN_PORT		GPIOD
-#define LCD_D5_PIN			GPIO_PIN_5
+#define LCD_D5_PIN			GPIO_PIN_7
 #define LCD_D5_PIN_PORT		GPIOD
-#define LCD_D6_PIN			GPIO_PIN_6
+#define LCD_D6_PIN			GPIO_PIN_8
 #define LCD_D6_PIN_PORT		GPIOD
-#define LCD_D7_PIN			GPIO_PIN_7
+#define LCD_D7_PIN			GPIO_PIN_9
 #define LCD_D7_PIN_PORT		GPIOD
 
 /*
@@ -49,6 +48,7 @@ void Set_Enable(void);
 void Reset_Enable(void);
 void LCD_Write(uint8_t wr);
 void LCD_Init(void);
+void LCD_Configure_GPIOS(void);
 void LCD_WriteCommand(uint8_t cmd);
 void LCD_WriteData(uint8_t *data, uint8_t size);
 void LCD_Clear_Screen(void);
