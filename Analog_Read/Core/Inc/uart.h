@@ -9,20 +9,33 @@
 #define INC_UART_H_
 
 #include <stdint.h>
+#include <stm32f4xx_hal.h>
+
+/*
+ * @brief UART modules enumerations.
+ */
+typedef enum{
+	UART_1,
+	UART_2,
+	UART_3,
+	UART_4,
+	UART_5,
+	UART_6
+}UART_id;
 
 /*
  * @brief UART Initialization Structure.
  */
 typedef struct{
 
-	USART_TypeDef                 *Instance;
+	USART_TypeDef                  *Instance;
 	uint32_t 					   BaudRate;
 	uint32_t 					   StopBits;
 	uint32_t 					   Parity;
 	uint32_t 					   WordLength;
 	uint32_t 					   OverSampling;
 	uint32_t					   Mode;
-
+	UART_id						   id;
 } UART_Handler;
 
 /*
@@ -57,6 +70,11 @@ typedef struct{
 #define STOPBITS2		((uintt32_t)(02UL << 12))
 
 /*
+ * @ UART Error Handler.
+ */
+void UART_Error_Handler(void);
+
+/*
  * @brief UART Pins Initializations.
  */
 uint8_t UART_GPIO_Init(void);
@@ -64,7 +82,12 @@ uint8_t UART_GPIO_Init(void);
 /*
  * @brief UART clock Enable.
  */
-uint8_t UART_Enable_Clock(USART_TypeDef *uart_instance);
+uint8_t UART_Enable_Clock(UART_Handler *uart);
+
+/*
+ * @brief UART Configure the BBR Register.
+ */
+uint8_t UART_Configure_BRR_Reg(UART_Handler *uart);
 
 /*
  * @brief UART Initialization function.

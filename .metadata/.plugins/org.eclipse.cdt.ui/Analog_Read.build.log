@@ -1,10 +1,365 @@
-14:13:09 **** Incremental Build of configuration Debug for project Analog_Read ****
-make -j12 all 
-arm-none-eabi-size  Analog_Read.elf 
-   text	   data	    bss	    dec	    hex	filename
-  30860	    468	   2220	  33548	   830c	Analog_Read.elf
-Finished building: default.size.stdout
- 
+12:00:26 **** Build of configuration Debug for project Analog_Read ****
+make -j8 all 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.o"
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c:86:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c:148:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c:117:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c:81:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c:36:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c:39:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c:97:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c:76:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c:62:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c:47:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c:108:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c:24:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c:23:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c:67:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c:23:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c:186:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32f407vgtx.d" -MT"Core/Startup/startup_stm32f407vgtx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32f407vgtx.o" "../Core/Startup/startup_stm32f407vgtx.s"
+arm-none-eabi-gcc "../Core/Src/it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/it.d" -MT"Core/Src/it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/it.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/msp.d" -MT"Core/Src/msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/msp.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f4xx.d" -MT"Core/Src/system_stm32f4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32f4xx.o"
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c:81:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c:258:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+arm-none-eabi-gcc "../Core/Src/uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F407xx -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/uart.d" -MT"Core/Src/uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/uart.o"
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/it.h:11,
+                 from ../Core/Src/it.c:8:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:287,
+                 from ../Core/Src/system_stm32f4xx.c:48:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Src/msp.c:9:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/main.h:11,
+                 from ../Core/Src/main.c:10:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:476,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:295,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:29,
+                 from ../Core/Inc/uart.h:12,
+                 from ../Core/Src/uart.c:8:
+../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:252: warning: "__HAL_ADC_JSQR" redefined
+  252 | #define   __HAL_ADC_JSQR(_CHANNELNB_, _RANKNB_,_JSQR_JL_) \
+      | 
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:30,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:27,
+                 from ../Core/Inc/stm32f4xx_hal_conf.h:275:
+../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:2189: note: this is the location of the previous definition
+ 2189 | #define __HAL_ADC_JSQR                                   ADC_JSQR
+      | 
+../Core/Src/uart.c: In function 'UART_Enable_Clock':
+../Core/Src/uart.c:17:16: error: switch quantity not an integer
+   17 |         switch(uart_instance)
+      |                ^~~~~~~~~~~~~
+../Core/Src/uart.c:19:17: error: pointers are not permitted as case values
+   19 |                 case USART1:
+      |                 ^~~~
+../Core/Src/uart.c:21:17: error: pointers are not permitted as case values
+   21 |                 case USART2:
+      |                 ^~~~
+../Core/Src/uart.c: In function 'UART_Configure_BRR_Reg':
+../Core/Src/uart.c:30:18: warning: unused variable 'USARTDIV' [-Wunused-variable]
+   30 |         uint32_t USARTDIV = fPCLK / (8 * (2 - OVER8) * (uart->BaudRate));
+      |                  ^~~~~~~~
+../Core/Src/uart.c: In function 'UART_GPIO_Init':
+../Core/Src/uart.c:13:1: warning: control reaches end of non-void function [-Wreturn-type]
+   13 | }
+      | ^
+../Core/Src/uart.c: In function 'UART_Enable_Clock':
+../Core/Src/uart.c:24:1: warning: control reaches end of non-void function [-Wreturn-type]
+   24 | }
+      | ^
+../Core/Src/uart.c: In function 'UART_Configure_BRR_Reg':
+../Core/Src/uart.c:33:1: warning: control reaches end of non-void function [-Wreturn-type]
+   33 | }
+      | ^
+../Core/Src/uart.c: In function 'UART_Init':
+../Core/Src/uart.c:52:1: warning: control reaches end of non-void function [-Wreturn-type]
+   52 | }
+      | ^
+make: *** [Core/Src/subdir.mk:31: Core/Src/uart.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
 
-14:13:09 Build Finished. 0 errors, 0 warnings. (took 380ms)
+12:00:32 Build Failed. 5 errors, 28 warnings. (took 5s.892ms)
 
