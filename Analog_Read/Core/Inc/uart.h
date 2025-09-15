@@ -12,15 +12,23 @@
 #include <stm32f4xx_hal.h>
 
 /*
+ * @brief Enumeration for Execution's result.
+ */
+typedef enum{
+	Execution_Uart_Succesfull,
+	Execution_Uart_Failed
+} UART_Execution_Status;
+
+/*
  * @brief UART modules enumerations.
  */
 typedef enum{
-	UART_1,
-	UART_2,
-	UART_3,
-	UART_4,
-	UART_5,
-	UART_6
+	UART_ID_1,
+	UART_ID_2,
+	UART_ID_3,
+	UART_ID_4,
+	UART_ID_5,
+	UART_ID_6
 }UART_id;
 
 /*
@@ -77,32 +85,37 @@ void UART_Error_Handler(void);
 /*
  * @brief UART Pins Initializations.
  */
-uint8_t UART_GPIO_Init(void);
+UART_Execution_Status UART_GPIO_Init(void);
 
 /*
  * @brief UART clock Enable.
  */
-uint8_t UART_Enable_Clock(UART_Handler *uart);
+UART_Execution_Status UART_Enable_Clock(UART_Handler *uart);
 
 /*
  * @brief UART Configure the BBR Register.
  */
-uint8_t UART_Configure_BRR_Reg(UART_Handler *uart);
+UART_Execution_Status UART_Configure_BRR_Reg(UART_Handler *uart);
+
+/*
+ * @brief UART Enable the IRQ for the specified UART module.
+ */
+UART_Execution_Status UART_Enable_IRQs(UART_Handler *uart);
 
 /*
  * @brief UART Initialization function.
  */
-uint8_t UART_Init(UART_Handler *uart);
+UART_Execution_Status UART_Init(UART_Handler *uart);
 
 /*
  * @brief UART Transmit function.
  */
-uint8_t UART_Transmit(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+UART_Execution_Status UART_Transmit(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
 
 /*
  * @brief UART Receive function.
  */
-uint8_t UART_Receive(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+UART_Execution_Status UART_Receive(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
 
 
 
