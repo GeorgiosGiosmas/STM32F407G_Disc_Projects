@@ -108,16 +108,34 @@ UART_Execution_Status UART_Enable_IRQs(UART_Handler *uart);
 UART_Execution_Status UART_Init(UART_Handler *uart);
 
 /*
- * @brief UART Transmit function.
+ * @brief UART Transmit function in Blocking Mode.
  */
 UART_Execution_Status UART_Transmit(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
 
 /*
- * @brief UART Receive function.
+ * @brief UART Receive function in Blocking Mode.
  */
 UART_Execution_Status UART_Receive(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
 
+/*
+ * @brief UART Transmit function in IT mode.
+ */
+UART_Execution_Status UART_Transmit_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
 
+/*
+ * @brief UART Receive function in IT mode.
+ */
+UART_Execution_Status UART_Receive_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+
+/*
+ * @brief UART Transmission Completed Callback.
+ */
+void UART_TXCPLT_CallBack(UART_Handler *uart);
+
+/*
+ * @brief UART Reception Completed Callback.
+ */
+void UART_RXCPLT_CallBack(UART_Handler *uart);
 
 
 #endif /* INC_UART_H_ */

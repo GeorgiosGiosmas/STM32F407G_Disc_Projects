@@ -88,7 +88,7 @@ UART_Execution_Status UART_Enable_IRQs(UART_Handler *uart)
 UART_Execution_Status UART_Configure_BRR_Reg(UART_Handler *uart)
 {
 	uint32_t fPCLK = HAL_RCC_GetPCLK1Freq();
-	uint32_t OVER8 = (uart->OverSampling >> 15) & 0xFFFFFFFF;
+	uint32_t OVER8 = (uart->OverSampling >> 15) & 0x00000001;
 	float USARTDIV = fPCLK / (8 * (2 - OVER8) * (uart->BaudRate));
 
 	uart->Instance->BRR |= 0x00;
@@ -121,12 +121,67 @@ UART_Execution_Status UART_Init(UART_Handler *uart)
 
 UART_Execution_Status UART_Transmit(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
 {
+	// Check if arguments are valid.
+	if(uart==NULL || pData==NULL || sizeData==0UL)
+		return Execution_Uart_Failed;
 
+	// Start the transmission of data.
+	for(uint32_t i=0; i<sizeData; i++)
+	{
+
+		// Wait for TXE to be set before writing to DR the next byte of data.
+		while( !(((uart->Instance->SR) >> 7) & 0x0001) );
+
+		uart->Instance->DR = pData[i];
+
+	}
+
+	// Wait for TC to be set by hardware to indicate that transmission ended.
+	while( !(((uart->Instance->SR) >> 6) & 0x0001) );
+
+	return Execution_Uart_Succesfull;
 }
 
 UART_Execution_Status UART_Receive(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
 {
+	// Check if arguments are valid.
+	if(uart==NULL || pData==NULL || sizeData==0UL)
+		return Execution_Uart_Failed;
 
+	// Start the reception of data.
+	for(uint32_t i=0; i<sizeData; i++)
+	{
+
+		// Wait for RXNE to be set before receiving from DR the next byte of data.
+		while( !(((uart->Instance->SR) >> 5) & 0x0001) );
+
+		pData[i] = uart->Instance->DR;
+
+	}
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Transmit_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
+{
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Receive_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
+{
+
+	return Execution_Uart_Succesfull;
+}
+
+__weak void UART_TXCPLT_CallBack(UART_Handler *uart)
+{
+	// Implement this in Application's file.
+}
+
+__weak void UART_RXCPLT_CallBack(UART_Handler *uart)
+{
+	// Implement this in Application's file.
 }
 
 void UART_Error_Handler(void)
