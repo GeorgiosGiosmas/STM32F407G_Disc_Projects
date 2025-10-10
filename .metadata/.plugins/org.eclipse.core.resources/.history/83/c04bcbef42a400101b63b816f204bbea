@@ -1,0 +1,207 @@
+/*
+ * uart.c
+ *
+ *  Created on: Sep 7, 2025
+ *      Author: gegio
+ */
+
+#include "uart.h"
+
+__weak UART_Execution_Status UART_GPIO_Init(void)
+{
+	/*
+	 * Configure the GPIO pins for UART communication according to the Reference Manual.
+	 * This function should by implemented by the user in his source file before running
+	 * UART_Init function.
+	 */
+	for(;;);
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Enable_Clock(UART_Handler *uart)
+{
+
+	switch(uart->id)
+	{
+		case UART_ID_1:
+			__HAL_RCC_USART1_CLK_ENABLE();
+			break;
+		case UART_ID_2:
+			__HAL_RCC_USART2_CLK_ENABLE();
+			break;
+		case UART_ID_3:
+			__HAL_RCC_USART3_CLK_ENABLE();
+			break;
+		case UART_ID_4:
+			__HAL_RCC_UART4_CLK_ENABLE();
+			break;
+		case UART_ID_5:
+			__HAL_RCC_UART5_CLK_ENABLE();
+			break;
+		case UART_ID_6:
+			__HAL_RCC_USART6_CLK_ENABLE();
+			break;
+		default:
+			UART_Error_Handler();
+	}
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Enable_IRQs(UART_Handler *uart)
+{
+
+	switch(uart->id)
+	{
+		case UART_ID_1:
+			HAL_NVIC_SetPriority(USART1_IRQn, 15, 0);
+			HAL_NVIC_EnableIRQ(USART1_IRQn);
+			break;
+		case UART_ID_2:
+			HAL_NVIC_SetPriority(USART2_IRQn, 15, 0);
+			HAL_NVIC_EnableIRQ(USART2_IRQn);
+			break;
+		case UART_ID_3:
+			HAL_NVIC_SetPriority(USART3_IRQn, 15, 0);
+			HAL_NVIC_EnableIRQ(USART3_IRQn);
+			break;
+		case UART_ID_4:
+			HAL_NVIC_SetPriority(UART4_IRQn, 15, 0);
+			HAL_NVIC_EnableIRQ(UART4_IRQn);
+			break;
+		case UART_ID_5:
+			HAL_NVIC_SetPriority(UART5_IRQn, 15, 0);
+			HAL_NVIC_EnableIRQ(UART5_IRQn);
+			break;
+		case UART_ID_6:
+			HAL_NVIC_SetPriority(USART6_IRQn, 15, 0);
+			HAL_NVIC_EnableIRQ(USART6_IRQn);
+			break;
+		default:
+			UART_Error_Handler();
+	}
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Configure_BRR_Reg(UART_Handler *uart)
+{
+	uint32_t fPCLK = HAL_RCC_GetPCLK2Freq(); // Adjust the value depending on the UART module you use.
+	uint32_t OVER8 = (uart->OverSampling >> 15) & 0x00000001;
+	double USARTDIV = (double)fPCLK / (8.0 * (2.0 - OVER8) * (uart->BaudRate));
+
+	uint8_t MANTISSA = USARTDIV;
+	double FRACTIONAL = round((USARTDIV - MANTISSA) * 16);
+
+	uart->Instance->BRR |= ((MANTISSA << 4) | (uint8_t)FRACTIONAL);
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Init(UART_Handler *uart)
+{
+
+	// Enable clock for UART module.
+	UART_Enable_Clock(uart);
+
+	// Initialize the PINs for UART communication.
+	UART_GPIO_Init();
+
+	// Enable IRQ.
+	UART_Enable_IRQs(uart);
+
+	// Enable the UART module.
+	uart->Instance->CR1 |= ((uint32_t)(01UL << 13));
+
+	// Initialize UART module.
+	uart->Instance->CR1 |= (uart->WordLength | uart->OverSampling | uart->Mode | uart->Parity );
+	uart->Instance->CR2 |= uart->StopBits;
+
+	if(UART_Configure_BRR_Reg(uart) != Execution_Uart_Succesfull)
+		return Execution_Uart_Failed;
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Transmit(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
+{
+	// Check if arguments are valid.
+	if(uart==NULL || pData==NULL || sizeData==0UL)
+		return Execution_Uart_Failed;
+
+	// Start the transmission of data.
+	for(uint32_t i=0; i<sizeData; i++)
+	{
+
+		// Wait for TXE to be set before writing to DR the next byte of data.
+		while( !(((uart->Instance->SR) >> 7) & 0x0001) );
+
+		uart->Instance->DR = pData[i];
+
+	}
+
+	// Wait for TC to be set by hardware to indicate that transmission ended.
+	while( !(((uart->Instance->SR) >> 6) & 0x0001) );
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Receive(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
+{
+	// Check if arguments are valid.
+	if(uart==NULL || pData==NULL || sizeData==0UL)
+		return Execution_Uart_Failed;
+
+	// Start the reception of data.
+	for(uint32_t i=0; i<sizeData; i++)
+	{
+
+		// Wait for RXNE to be set before receiving from DR the next byte of data.
+		while( !(((uart->Instance->SR) >> 5) & 0x0001) );
+
+		pData[i] = uart->Instance->DR;
+
+	}
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Transmit_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
+{
+
+	// Define the base address and the size of the data to be transfered.
+	uart->pData 	= pData;
+	uart->Size 		= sizeData;
+	uart->Count 	= 0;
+
+	return Execution_Uart_Succesfull;
+}
+
+UART_Execution_Status UART_Receive_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData)
+{
+
+	// Define the base address and the size of the data to be transfered.
+	uart->pData 	= pData;
+	uart->Size 		= sizeData;
+	uart->Count 	= 0;
+
+	return Execution_Uart_Succesfull;
+}
+
+__weak void UART_TXCPLT_CallBack(UART_Handler *uart)
+{
+	// Implement this in Application's file.
+}
+
+__weak void UART_RXCPLT_CallBack(UART_Handler *uart)
+{
+	// Implement this in Application's file.
+}
+
+void UART_Error_Handler(void)
+{
+	// When Error Occurs during UART Communication.
+	for(;;);
+
+}

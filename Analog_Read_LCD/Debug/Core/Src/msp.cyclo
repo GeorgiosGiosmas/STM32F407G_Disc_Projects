@@ -1,0 +1,4 @@
+../Core/Src/msp.c:11:6:HAL_MspInit	1
+../Core/Src/msp.c:29:6:HAL_ADC_MspInit	1
+../Core/Src/msp.c:49:6:HAL_TIM_PWM_MspInit	1
+../Core/Src/msp.c:72:6:LCD_Configure_GPIOS	1

@@ -1,0 +1,143 @@
+/*
+ * uart.h
+ *
+ *  Created on: Sep 7, 2025
+ *      Author: gegio
+ */
+
+#ifndef INC_UART_H_
+#define INC_UART_H_
+
+#include <stdint.h>
+#include <stm32f4xx_hal.h>
+
+/*
+ * @brief Enumeration for Execution's result.
+ */
+typedef enum{
+	Execution_Uart_Succesfull,
+	Execution_Uart_Failed
+} UART_Execution_Status;
+
+/*
+ * @brief UART modules enumerations.
+ */
+typedef enum{
+	UART_ID_1,
+	UART_ID_2,
+	UART_ID_3,
+	UART_ID_4,
+	UART_ID_5,
+	UART_ID_6
+}UART_id;
+
+/*
+ * @brief UART Initialization Structure.
+ */
+typedef struct{
+
+	USART_TypeDef                  *Instance;
+	uint32_t 					   BaudRate;
+	uint32_t 					   StopBits;
+	uint32_t 					   Parity;
+	uint32_t 					   WordLength;
+	uint32_t 					   OverSampling;
+	uint32_t					   Mode;
+	UART_id						   id;
+	uint8_t						   *pData;
+	uint32_t					   Size;
+} UART_Handler;
+
+/*
+ * @brief UART OverSampling.
+ */
+#define OVERSAMPLING16	( 0x00000000UL )
+#define OVERSAMPLING8	((uint32_t)(01UL << 15)) // DISABLED
+
+/*
+ * @brief UART Word Length.
+ */
+#define WORDLENGTH8		( 0x00000000UL )
+#define WORDLENGTH9		((uint32_t)(01UL << 12))
+
+/*
+ * @brief UART Parity.
+ */
+#define PARITYEVEN		( 0x00000000UL )
+#define PARITYODD		((uint32_t)(01UL << 9))
+
+/*
+ * @brief UART mode.
+ */
+#define RXMODE			((uint32_t)(01UL << 2))
+#define TXMODE			((uint32_t)(01UL << 3))
+#define TXRXMODE		((uint32_t)(01UL << 2 | 01UL << 3))
+
+/*
+ * @brief UART Stop Bits.
+ */
+#define STOPBITS1		( 0x00000000UL )
+#define STOPBITS2		((uintt32_t)(02UL << 12))
+
+/*
+ * @ UART Error Handler.
+ */
+void UART_Error_Handler(void);
+
+/*
+ * @brief UART Pins Initializations.
+ */
+UART_Execution_Status UART_GPIO_Init(void);
+
+/*
+ * @brief UART clock Enable.
+ */
+UART_Execution_Status UART_Enable_Clock(UART_Handler *uart);
+
+/*
+ * @brief UART Configure the BBR Register.
+ */
+UART_Execution_Status UART_Configure_BRR_Reg(UART_Handler *uart);
+
+/*
+ * @brief UART Enable the IRQ for the specified UART module.
+ */
+UART_Execution_Status UART_Enable_IRQs(UART_Handler *uart);
+
+/*
+ * @brief UART Initialization function.
+ */
+UART_Execution_Status UART_Init(UART_Handler *uart);
+
+/*
+ * @brief UART Transmit function in Blocking Mode.
+ */
+UART_Execution_Status UART_Transmit(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+
+/*
+ * @brief UART Receive function in Blocking Mode.
+ */
+UART_Execution_Status UART_Receive(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+
+/*
+ * @brief UART Transmit function in IT mode.
+ */
+UART_Execution_Status UART_Transmit_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+
+/*
+ * @brief UART Receive function in IT mode.
+ */
+UART_Execution_Status UART_Receive_IT(UART_Handler *uart, uint8_t *pData, uint32_t sizeData);
+
+/*
+ * @brief UART Transmission Completed Callback.
+ */
+void UART_TXCPLT_CallBack(UART_Handler *uart);
+
+/*
+ * @brief UART Reception Completed Callback.
+ */
+void UART_RXCPLT_CallBack(UART_Handler *uart);
+
+
+#endif /* INC_UART_H_ */

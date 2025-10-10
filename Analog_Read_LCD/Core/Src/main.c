@@ -56,7 +56,7 @@ int main(void)
 			Delay(20); // Delay 20ms
 
 			potensiometer = potensiometer_value * 0.0007324;
-			sprintf(lcd_buffer, "P: %1.2f V.\n\r", potensiometer);
+			sprintf(lcd_buffer, "P: %1.2f V.", potensiometer);
 			LCD_WriteData((uint8_t*)lcd_buffer, 16);
 		}
 		HAL_ADC_Stop(&adc1_potensiometer);

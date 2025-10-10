@@ -1,0 +1,130 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Jun 17, 2025
+ *      Author: gigio
+ */
+
+#include "lcd.h"
+
+void Set_Enable(void)
+{
+	HAL_GPIO_WritePin(LCD_E_PIN_PORT, LCD_E_PIN, GPIO_PIN_SET);
+	Delay_us(1);
+}
+
+void Reset_Enable(void)
+{
+	Delay_us(1);
+	HAL_GPIO_WritePin(LCD_E_PIN_PORT, LCD_E_PIN, GPIO_PIN_RESET);
+}
+
+void LCD_Write(uint8_t wr)
+{
+	// When we use all 8 bits.
+#if !DATALINE_4_BITS
+	Set_Enable();
+	HAL_GPIO_WritePin(LCD_D0_PIN_PORT, LCD_D0_PIN, (wr & 0x01) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D1_PIN_PORT, LCD_D1_PIN, (wr & 0x02) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D2_PIN_PORT, LCD_D2_PIN, (wr & 0x04) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D3_PIN_PORT, LCD_D3_PIN, (wr & 0x08) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D4_PIN_PORT, LCD_D4_PIN, (wr & 0x10) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D5_PIN_PORT, LCD_D5_PIN, (wr & 0x20) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D6_PIN_PORT, LCD_D6_PIN, (wr & 0x40) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D7_PIN_PORT, LCD_D7_PIN, (wr & 0x80) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	Reset_Enable();
+#endif
+#if DATALINE_4_BITS
+	uint8_t D3_D0 = ( wr & 0x0F );
+	uint8_t D7_D4 = ( wr >> 4 );
+
+	Set_Enable();
+	HAL_GPIO_WritePin(LCD_D4_PIN_PORT, LCD_D4_PIN, (D7_D4 & 0x10) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D5_PIN_PORT, LCD_D5_PIN, (D7_D4 & 0x20) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D6_PIN_PORT, LCD_D6_PIN, (D7_D4 & 0x40) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D7_PIN_PORT, LCD_D7_PIN, (D7_D4 & 0x80) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	Reset_Enable();
+
+	Set_Enable();
+	HAL_GPIO_WritePin(LCD_D4_PIN_PORT, LCD_D4_PIN, (D3_D0 & 0x10) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D5_PIN_PORT, LCD_D5_PIN, (D3_D0 & 0x20) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D6_PIN_PORT, LCD_D6_PIN, (D3_D0 & 0x40) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_D7_PIN_PORT, LCD_D7_PIN, (D3_D0 & 0x80) ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	Reset_Enable();
+#endif
+
+}
+
+void LCD_WriteCommand(uint8_t cmd)
+{
+	// Ensure that the busy flag is not set, by reading DB7, before writing the next instruction.
+	HAL_GPIO_WritePin(LCD_RS_PIN_PORT, LCD_RS_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_RW_PIN_PORT, LCD_RW_PIN, GPIO_PIN_SET);
+	while( HAL_GPIO_ReadPin(LCD_D7_PIN_PORT, LCD_D7_PIN) == 1);
+
+	HAL_GPIO_WritePin(LCD_RS_PIN_PORT, LCD_RS_PIN, GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(LCD_RW_PIN_PORT, LCD_RW_PIN, GPIO_PIN_RESET);
+	LCD_Write(cmd);
+}
+
+void LCD_WriteData(uint8_t *data, uint8_t size)
+{
+	HAL_GPIO_WritePin(LCD_RS_PIN_PORT, LCD_RS_PIN, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LCD_RW_PIN_PORT, LCD_RW_PIN, GPIO_PIN_RESET);
+
+	for(uint8_t i=0; i<size; i++)
+		LCD_Write(data[i]);
+}
+
+void LCD_Clear_Screen(void)
+{
+	LCD_WriteCommand(0x01);
+}
+
+void LCD_Init(void)
+{
+#if !DATALINE_4_BITS
+	Delay_us(40);
+	LCD_WriteCommand(0x38);
+	Delay_us(5);
+	LCD_WriteCommand(0x38);
+	Delay_us(2);
+	LCD_WriteCommand(0x0C);
+	Delay_us(2);
+	LCD_WriteCommand(0x01);
+	Delay_us(5);
+	LCD_WriteCommand(0x06);
+	Delay_us(1);
+#endif
+#if DATALINE_4_BITS
+	Delay_us(40);
+	LCD_WriteCommand(0x28);
+	Delay_us(2);
+	LCD_WriteCommand(0x28);
+	Delay_us(2);
+	LCD_WriteCommand(0x28);
+	Delay_us(2);
+	LCD_WriteCommand(0x0C);
+	Delay_us(2);
+	LCD_WriteCommand(0x01);
+	Delay_us(5);
+	LCD_WriteCommand(0x06);
+	Delay_us(1);
+#endif
+}
+
+void Delay_us(uint32_t us)
+{
+	DWT->CTRL |= (1 << 0); // Enable the DTW counter of the CortexM4
+	uint32_t start = DWT->CYCCNT;
+	uint32_t ticks = us * (HAL_RCC_GetHCLKFreq() / 1000000);
+
+	while ((DWT->CYCCNT - start) < ticks);
+}
+
+
+__weak void LCD_Configure_GPIOS(void)
+{
+	/* Configure this function inside the msp.c file . */
+}
+
